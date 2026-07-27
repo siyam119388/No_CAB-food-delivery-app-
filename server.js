@@ -21,7 +21,7 @@ const wss = new WebSocket.Server({ server });
 // Store conversations per connection
 const conversationStore = new Map();
 
-wss.on('connection', (ws, req) => {
+wss.on('connection', (ws) => {
   const connectionId = Math.random().toString(36).substring(7);
   console.log(`[${connectionId}] Client connected`);
 

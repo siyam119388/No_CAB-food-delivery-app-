@@ -18,23 +18,23 @@ ws.on('message', (data) => {
   const message = JSON.parse(data);
 
   switch (message.type) {
-    case 'ready':
-      console.log(`\n[Server] ${message.message}\n`);
-      break;
-    case 'token':
-      process.stdout.write(message.content);
-      break;
-    case 'complete':
-      console.log('\n');
-      promptUser();
-      break;
-    case 'error':
-      console.error(`\n[Error] ${message.message}\n`);
-      promptUser();
-      break;
-    default:
-      console.log(`\n[Server] ${JSON.stringify(message)}\n`);
-      promptUser();
+  case 'ready':
+    console.log(`\n[Server] ${message.message}\n`);
+    break;
+  case 'token':
+    process.stdout.write(message.content);
+    break;
+  case 'complete':
+    console.log('\n');
+    promptUser();
+    break;
+  case 'error':
+    console.error(`\n[Error] ${message.message}\n`);
+    promptUser();
+    break;
+  default:
+    console.log(`\n[Server] ${JSON.stringify(message)}\n`);
+    promptUser();
   }
 });
 
