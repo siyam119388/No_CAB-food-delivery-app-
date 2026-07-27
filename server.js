@@ -88,7 +88,7 @@ async function streamOllamaResponse(ws, connectionId, conversationHistory) {
       },
       {
         responseType: 'stream',
-        timeout: 60000,
+        timeout: 180000,
       }
     );
 
