@@ -7,7 +7,9 @@
       "Bash(mv .tmp_clone/.git . && mv .tmp_clone/README.md . && mv .tmp_clone/week1.gitkeep . && mv .tmp_clone/week2.gitkeep . && rmdir .tmp_clone && ls -la)",
       "Bash(git checkout *)",
       "Bash(git add *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(gh pr create --title 'feat: Initialize voice agent feature branch' --body ' *)"
     ]
   }
 }
