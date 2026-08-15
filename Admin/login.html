@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!-- ==========================================================
+     NoCap  |  Screen 15 — Admin login
+     Backend for this screen: Part 2
+     ========================================================== -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NoCap — NoCap Admin</title>
+  <link rel="icon" href="../assets/logo-mark.svg">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="../index.html">
+    <img src="../assets/logo-mark.svg" alt="">
+    <b>No<i>Cap</i></b>
+  </a>
+  
+  <div class="topbar-right">
+    <span class="mocktag" id="mockTag"></span>
+    <span class="role">ADMIN</span>
+  </div>
+</header>
+
+<main class="page">
+  <div class="auth-wrap single">
+    <div class="page-head">
+      <div class="back" onclick="location.href='../index.html'">&#8249; Back</div>
+      <h1 id="pageTitle">NoCap Admin</h1>
+      <p id="pageSub">Restricted access console</p>
+    </div>
+
+    <div style="text-align:center;padding:24px 0 16px">
+      <div style="font-size:40px">&#128737;</div>
+      <div class="name gold" style="font-size:16px;margin-top:8px">NoCap Admin Console</div>
+      <div class="small">Verification &bull; Hygiene &bull; Review moderation</div>
+    </div>
+
+    <div class="title">ADMINISTRATOR LOGIN</div>
+    <input class="input" id="email" placeholder="admin@nocap.com.bd">
+    <input class="input" id="password" type="password" placeholder="Password">
+    <input class="input" id="otp" placeholder="6-digit 2FA code (any 6 digits)">
+    <div class="err" id="err"></div>
+    <button class="btn" id="loginBtn">Secure Sign In</button>
+
+    <div class="line"></div>
+    <div class="card card-red"><div class="small"><span class="red">&#9888;</span>
+      Every admin action is logged with admin ID, IP and timestamp.</div></div>
+    <div class="card card-blue"><div class="small"><span class="blue">&#8505;</span>
+      Admin accounts are created directly in the database. There is no public admin sign-up.</div></div>
+  </div>
+</main>
+
+
+
+  <script src="../js/api.js"></script>
+  <script src="../js/mock-data.js"></script>
+  <script src="../js/auth.js"></script>
+  <script>
+    document.getElementById("mockTag").textContent = USE_MOCK ? "demo data" : "live api";
+    document.querySelector("#loginBtn").onclick = async () => {
+      const err = document.querySelector("#err");
+      if (document.querySelector("#otp").value.trim().length !== 6) {
+        err.textContent = "Enter a 6-digit 2FA code."; return; }
+      try {
+        await login(document.querySelector("#email").value.trim(),
+                    document.querySelector("#password").value, "ADMIN");
+        location.href = "dashboard.html";
+      } catch (e) { err.textContent = e.message; }
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<!-- ==========================================================
+     NoCap  |  Screen 18 — Verification detail
+     Backend for this screen: Part 3
+     ========================================================== -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NoCap — Verify</title>
+  <link rel="icon" href="../assets/logo-mark.svg">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="../index.html">
+    <img src="../assets/logo-mark.svg" alt="">
+    <b>No<i>Cap</i></b>
+  </a>
+  <nav class="topnav">
+    <a class="" href="dashboard.html"><span>&#128202;</span>Dashboard</a>
+    <a class="on" href="verification.html"><span>&#9989;</span>Verify</a>
+    <a class="" href="hygiene.html"><span>&#127970;</span>Hygiene</a>
+    <a class="" href="reviews.html"><span>&#129302;</span>Reviews</a>
+  </nav>
+  <div class="topbar-right">
+    <span class="mocktag" id="mockTag"></span>
+    <span class="role">ADMIN</span>
+  </div>
+</header>
+
+<main class="page">
+  <div class="wrap">
+    <div class="page-head">
+      <div class="back" onclick="location.href='verification.html'">&#8249; Back</div>
+      <h1 id="pageTitle">Verify</h1>
+      <p id="pageSub">4-stage verification procedure</p>
+    </div>
+
+    <div class="card">
+      <div class="row"><span class="sub">PROGRESS</span>
+        <span class="gold" style="font-weight:700" id="pct">0%</span></div>
+      <div class="bar"><div class="fill" id="pctBar" style="width:0%"></div></div>
+      <div class="small" id="stageText"></div>
+    </div>
+
+    <div id="stages"></div>
+
+    <div class="card card-accent hide" id="noteBox">
+      <div class="small"><span class="gold" style="font-weight:700">Officer note:</span>
+        <span id="officerNote"></span></div>
+    </div>
+
+    <div class="card card-green"><div class="small">
+      <span class="green">On approval:</span> the restaurant goes live with a &#9989; Verified
+      badge and joins the random hygiene photo cycle.
+    </div></div>
+
+    <div id="actions"></div>
+  </div>
+</main>
+
+<nav class="tabbar">
+    <a class="" href="dashboard.html"><span>&#128202;</span>Dashboard</a>
+    <a class="on" href="verification.html"><span>&#9989;</span>Verify</a>
+    <a class="" href="hygiene.html"><span>&#127970;</span>Hygiene</a>
+    <a class="" href="reviews.html"><span>&#129302;</span>Reviews</a>
+  </nav>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/mock-data.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/admin.js"></script>
+  <script>
+    document.getElementById("mockTag").textContent = USE_MOCK ? "demo data" : "live api";
+    if (requireRole("ADMIN", "login.html")) {
+      document.querySelector("#pageTitle").id = "title";
+      document.querySelector("#pageSub").id = "sub";
+      loadVerifyDetail();
+    }
+  </script>
+</body>
+</html>
