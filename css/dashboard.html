@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!-- ==========================================================
+     NoCap  |  Screen 10 — Owner dashboard
+     Backend for this screen: Part 4
+     ========================================================== -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NoCap — Restaurant</title>
+  <link rel="icon" href="../assets/logo-mark.svg">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="../index.html">
+    <img src="../assets/logo-mark.svg" alt="">
+    <b>No<i>Cap</i></b>
+  </a>
+  <nav class="topnav">
+    <a class="on" href="dashboard.html"><span>&#128202;</span>Dashboard</a>
+    <a class="" href="menu.html"><span>&#128221;</span>Menu</a>
+    <a class="" href="orders.html"><span>&#128230;</span>Orders</a>
+    <a class="" href="hygiene.html"><span>&#128247;</span>Hygiene</a>
+  </nav>
+  <div class="topbar-right">
+    <span class="mocktag" id="mockTag"></span>
+    <span class="role">RESTAURANT</span>
+  </div>
+</header>
+
+<main class="page">
+  <div class="wrap">
+    <div class="page-head">
+      <h1 id="pageTitle">Restaurant</h1>
+      <p id="pageSub">Restaurant dashboard</p>
+    </div>
+
+    <div class="card card-green">
+      <div class="row">
+        <div><div class="stat-l">YOUR HYGIENE SCORE</div>
+          <div class="big green"><span id="score">0</span><span style="font-size:14px;color:#7d7d7d">/100</span></div></div>
+        <div style="text-align:right"><span class="badge b-green" id="statusBadge">&#9989; VERIFIED</span>
+          <div class="sub" style="margin-top:6px" id="statusNote"></div></div>
+      </div>
+      <div class="bar"><div class="fill" id="scoreBar" style="width:0%"></div></div>
+    </div>
+
+    <div class="grid2">
+      <div class="stat"><div class="stat-v" id="ordersToday">0</div><div class="stat-l">TOTAL ORDERS</div></div>
+      <div class="stat"><div class="stat-v gold" id="salesToday">0</div><div class="stat-l">DELIVERED SALES</div></div>
+      <div class="stat"><div class="stat-v blue" id="pendingOrders">0</div><div class="stat-l">ACTIVE ORDERS</div></div>
+      <div class="stat"><div class="stat-v" id="rating">0</div><div class="stat-l">RATING</div></div>
+    </div>
+
+    <div class="title">&#9888; NEEDS ATTENTION</div>
+    <div class="card card-accent hide" id="hygieneAlert" onclick="location.href='hygiene.html'">
+      <div class="row"><div><div class="name gold">Hygiene photo due</div>
+        <div class="sub">Upload a kitchen photo within 15 minutes</div></div>
+        <span class="badge b-gold">UPLOAD</span></div>
+    </div>
+    <div class="card card-blue hide" id="orderAlert" onclick="location.href='orders.html'">
+      <div class="row"><div><div class="name blue">New orders</div>
+        <div class="sub" id="orderAlertText"></div></div>
+        <span class="badge b-blue">VIEW</span></div>
+    </div>
+
+    <div class="title">QUICK ACTIONS</div>
+    <div class="card">
+      <div class="li" onclick="location.href='verification.html'">
+        <span>&#9989; Verification status</span><span class="sub">&#8250;</span></div>
+      <div class="li" onclick="location.href='menu.html'">
+        <span>&#128221; Manage menu</span><span class="sub" id="menuCount">&#8250;</span></div>
+      <div class="li" onclick="location.href='orders.html'">
+        <span>&#128230; Manage orders</span><span class="sub">&#8250;</span></div>
+      <div class="li" onclick="location.href='hygiene.html'">
+        <span>&#128247; Hygiene uploads</span><span class="sub">&#8250;</span></div>
+    </div>
+
+    <button class="btn-red" onclick="logout('../index.html')">Log Out</button>
+  </div>
+</main>
+
+<nav class="tabbar">
+    <a class="on" href="dashboard.html"><span>&#128202;</span>Dashboard</a>
+    <a class="" href="menu.html"><span>&#128221;</span>Menu</a>
+    <a class="" href="orders.html"><span>&#128230;</span>Orders</a>
+    <a class="" href="hygiene.html"><span>&#128247;</span>Hygiene</a>
+  </nav>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/mock-data.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/restaurant.js"></script>
+  <script>
+    document.getElementById("mockTag").textContent = USE_MOCK ? "demo data" : "live api";
+    if (requireRole("RESTAURANT_OWNER", "../index.html")) {
+      document.querySelector("#pageTitle").id = "restName";
+      loadOwnerDashboard();
+    }
+  </script>
+</body>
+</html>
