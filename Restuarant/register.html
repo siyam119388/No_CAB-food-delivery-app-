@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<!-- ==========================================================
+     NoCap  |  Screen 09 — Restaurant sign up
+     Backend for this screen: Part 2
+     ========================================================== -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NoCap — Restaurant Sign Up</title>
+  <link rel="icon" href="../assets/logo-mark.svg">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="../index.html">
+    <img src="../assets/logo-mark.svg" alt="">
+    <b>No<i>Cap</i></b>
+  </a>
+  
+  <div class="topbar-right">
+    <span class="mocktag" id="mockTag"></span>
+    <span class="role">RESTAURANT</span>
+  </div>
+</header>
+
+<main class="page">
+  <div class="auth-wrap single">
+    <div class="page-head">
+      <div class="back" onclick="location.href='../index.html'">&#8249; Back</div>
+      <h1 id="pageTitle">Restaurant Sign Up</h1>
+      <p id="pageSub">Register your restaurant on NoCap</p>
+    </div>
+
+    <div class="title">RESTAURANT DETAILS</div>
+    <div class="fieldgrid">
+      <input class="input" id="restaurantName" placeholder="Restaurant name">
+      <input class="input" id="address" placeholder="Full address">
+      <input class="input" id="cuisine" placeholder="Cuisine type (e.g. Indian)">
+    </div>
+
+    <div class="title">OWNER DETAILS</div>
+    <div class="fieldgrid">
+      <input class="input" id="ownerName" placeholder="Owner full name">
+      <input class="input" id="email" type="email" placeholder="Owner email">
+      <input class="input" id="password" type="password" placeholder="Password">
+    </div>
+
+    <div class="card card-blue"><div class="small">
+      <span class="blue">&#128203; Next step:</span> after signing up you must upload your
+      Trade Licence, Chef Certificate and NID. Your restaurant stays hidden from
+      customers until an admin approves it.
+    </div></div>
+
+    <div class="err" id="err"></div>
+    <button class="btn" id="regBtn">Register Restaurant</button>
+    <p class="small" style="text-align:center;margin-top:10px">
+      Already registered? <a class="gold" style="font-weight:700" href="../index.html">Sign in</a></p>
+  </div>
+</main>
+
+
+
+  <script src="../js/api.js"></script>
+  <script src="../js/mock-data.js"></script>
+  <script src="../js/auth.js"></script>
+  <script>
+    document.getElementById("mockTag").textContent = USE_MOCK ? "demo data" : "live api";
+    document.querySelector("#regBtn").onclick = async () => {
+      const v = id => document.querySelector("#" + id).value.trim();
+      const err = document.querySelector("#err");
+      if (!v("restaurantName") || !v("email") || !v("password")) {
+        err.textContent = "Restaurant name, email and password are required."; return; }
+      try {
+        await registerRestaurant({ restaurantName: v("restaurantName"), address: v("address"),
+          cuisine: v("cuisine") || "Others", ownerName: v("ownerName"),
+          email: v("email"), password: v("password") });
+        location.href = "verification.html";
+      } catch (e) { err.textContent = e.message; }
+    };
+  </script>
+</body>
+</html>

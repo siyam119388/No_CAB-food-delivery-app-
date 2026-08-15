@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<!-- ==========================================================
+     NoCap  |  Screen 14 — Hygiene photo uploads
+     Backend for this screen: Part 5
+     ========================================================== -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NoCap — Hygiene Uploads</title>
+  <link rel="icon" href="../assets/logo-mark.svg">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="../index.html">
+    <img src="../assets/logo-mark.svg" alt="">
+    <b>No<i>Cap</i></b>
+  </a>
+  <nav class="topnav">
+    <a class="" href="dashboard.html"><span>&#128202;</span>Dashboard</a>
+    <a class="" href="menu.html"><span>&#128221;</span>Menu</a>
+    <a class="" href="orders.html"><span>&#128230;</span>Orders</a>
+    <a class="on" href="hygiene.html"><span>&#128247;</span>Hygiene</a>
+  </nav>
+  <div class="topbar-right">
+    <span class="mocktag" id="mockTag"></span>
+    <span class="role">RESTAURANT</span>
+  </div>
+</header>
+
+<main class="page">
+  <div class="wrap">
+    <div class="page-head">
+      <h1 id="pageTitle">Hygiene Uploads</h1>
+      <p id="pageSub">Random kitchen photo checks</p>
+    </div>
+
+    <div class="card card-accent hide" id="pendingBox">
+      <div class="row"><div><div class="name gold">&#9200; Photo check requested</div>
+        <div class="sub">Upload a kitchen photo now</div></div>
+        <div class="big gold" style="font-size:20px">15:00</div></div>
+      <div class="bar"><div class="fill" style="width:100%"></div></div>
+      <div class="small">A missed 15-minute deadline counts as a fail.</div>
+    </div>
+
+    <div class="card card-blue hide" id="uploadBox" style="text-align:center;padding:22px">
+      <div style="font-size:26px">&#128247;</div>
+      <div class="small blue" style="margin-top:4px">Tap below to submit a kitchen photo</div>
+    </div>
+    <button class="btn hide" id="uploadBtn"
+            style="display:block">Upload Photo</button>
+
+    <div class="card card-green hide" id="noPending"><div class="small">
+      <span class="green">&#9989;</span> No photo check pending right now.
+      You will be notified when the next random check is requested.
+    </div></div>
+
+    <div class="card" id="failWarn"></div>
+
+    <div class="title">RECENT CHECKS</div>
+    <div class="card" id="history"></div>
+  </div>
+</main>
+
+<nav class="tabbar">
+    <a class="" href="dashboard.html"><span>&#128202;</span>Dashboard</a>
+    <a class="" href="menu.html"><span>&#128221;</span>Menu</a>
+    <a class="" href="orders.html"><span>&#128230;</span>Orders</a>
+    <a class="on" href="hygiene.html"><span>&#128247;</span>Hygiene</a>
+  </nav>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/mock-data.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/restaurant.js"></script>
+  <script>
+    document.getElementById("mockTag").textContent = USE_MOCK ? "demo data" : "live api";
+    if (requireRole("RESTAURANT_OWNER", "../index.html")) {
+      loadHygiene().then(() => {
+        const pending = !document.querySelector("#uploadBox").classList.contains("hide");
+        document.querySelector("#uploadBtn").classList.toggle("hide", !pending);
+      });
+    }
+  </script>
+</body>
+</html>
