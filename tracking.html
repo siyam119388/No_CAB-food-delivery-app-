@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!-- ==========================================================
+     NoCap  |  Screen 06 — Order tracking
+     Backend for this screen: Part 4
+     ========================================================== -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NoCap — Order</title>
+  <link rel="icon" href="assets/logo-mark.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="index.html">
+    <img src="assets/logo-mark.svg" alt="">
+    <b>No<i>Cap</i></b>
+  </a>
+  <nav class="topnav">
+    <a class="" href="home.html"><span>&#127968;</span>Home</a>
+    <a class="" href="checkout.html"><span>&#128722;</span>Cart</a>
+    <a class="on" href="orders.html"><span>&#128203;</span>Orders</a>
+    <a class="" href="profile.html"><span>&#128100;</span>Profile</a>
+  </nav>
+  <div class="topbar-right">
+    <span class="mocktag" id="mockTag"></span>
+    <span class="role">CUSTOMER</span>
+  </div>
+</header>
+
+<main class="page">
+  <div class="wrap">
+    <div class="page-head">
+      <div class="back" onclick="location.href='orders.html'">&#8249; Back</div>
+      <h1 id="pageTitle">Order</h1>
+      <p id="pageSub">Tracking</p>
+    </div>
+
+    <div class="card card-green" style="text-align:center">
+      <div class="stat-l">ARRIVING IN</div>
+      <div class="big green" style="margin:4px 0" id="eta">--</div>
+      <div class="bar"><div class="fill" id="etaBar" style="width:0%"></div></div>
+    </div>
+
+    <div class="title">ORDER STATUS</div>
+    <div id="steps"></div>
+
+    <div class="line"></div>
+    <div class="card">
+      <div class="li"><span class="sub">Order ID</span><span id="orderNo"></span></div>
+      <div class="li"><span class="sub">Items</span><span id="itemCount"></span></div>
+      <div class="li"><span class="sub">Payment</span><span id="payMethod"></span></div>
+    </div>
+
+    <a class="btn-out" href="orders.html" style="display:block">Back to My Orders</a>
+  </div>
+</main>
+
+<nav class="tabbar">
+    <a class="" href="home.html"><span>&#127968;</span>Home</a>
+    <a class="" href="checkout.html"><span>&#128722;</span>Cart</a>
+    <a class="on" href="orders.html"><span>&#128203;</span>Orders</a>
+    <a class="" href="profile.html"><span>&#128100;</span>Profile</a>
+  </nav>
+
+  <script src="js/api.js"></script>
+  <script src="js/mock-data.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/customer.js"></script>
+  <script>
+    document.getElementById("mockTag").textContent = USE_MOCK ? "demo data" : "live api";
+    if (requireRole("CUSTOMER")) {
+      document.querySelector("#pageTitle").id = "trackTitle";
+      document.querySelector("#pageSub").id = "trackSub";
+      loadTracking();
+    }
+  </script>
+</body>
+</html>

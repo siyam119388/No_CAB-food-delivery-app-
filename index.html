@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!-- ==========================================================
+     NoCap  |  Screen 01 — Login + role switcher
+     Backend for this screen: Part 2
+     ========================================================== -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NoCap — NoCap</title>
+  <link rel="icon" href="assets/logo-mark.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="index.html">
+    <img src="assets/logo-mark.svg" alt="">
+    <b>No<i>Cap</i></b>
+  </a>
+  
+  <div class="topbar-right">
+    <span class="mocktag" id="mockTag"></span>
+    <span class="role">LOGIN</span>
+  </div>
+</header>
+
+<main class="page">
+  <div class="auth-wrap">
+    <div class="page-head">
+      <h1 id="pageTitle">NoCap</h1>
+      <p id="pageSub">No fake reviews. No dirty kitchens.</p>
+    </div>
+
+    <div class="auth-hero">
+      <img class="biglogo" src="assets/logo.svg" alt="NoCap delivery bike">
+      <div style="font-size:26px;font-weight:700;margin-top:4px" class="gold">NoCap</div>
+      <div class="small">Every kitchen verified. Every review real.</div>
+
+      <div class="hero-points">
+        <div class="card card-green"><div class="flexrow">
+          <div class="thumb" style="background:linear-gradient(135deg,#00A86B,#4A90E2)">&#9989;</div>
+          <div><div class="name">Hygiene verified</div>
+            <div class="sub">Every kitchen inspected and scored</div></div></div></div>
+        <div class="card card-blue"><div class="flexrow">
+          <div class="thumb" style="background:linear-gradient(135deg,#4A90E2,#D4A574)">&#129302;</div>
+          <div><div class="name">Real reviews only</div>
+            <div class="sub">Linked to a delivered order, always</div></div></div></div>
+      </div>
+    </div>
+
+    <div class="auth-side">
+    <div class="title">LOGIN AS</div>
+    <div style="margin-bottom:12px">
+      <span class="chip on" data-role="CUSTOMER">&#128100; Customer</span>
+      <span class="chip" data-role="RESTAURANT_OWNER">&#127970; Restaurant</span>
+      <span class="chip" data-role="ADMIN">&#128737; Admin</span>
+    </div>
+
+    <input class="input" id="email" type="email" placeholder="Email address">
+    <input class="input" id="password" type="password" placeholder="Password">
+    <div class="err" id="err"></div>
+    <button class="btn" id="loginBtn">Sign In</button>
+
+    <p class="small" style="text-align:center;margin-top:12px">
+      New here? <a class="gold" style="font-weight:700" href="signup.html">Create an account</a>
+    </p>
+
+    <div class="line"></div>
+    <div class="title">DEMO ACCOUNTS &mdash; password: nocap123</div>
+    <div class="card">
+      <div class="li"><span class="sub">Customer</span><span class="gold">ashikur@gmail.com</span></div>
+      <div class="li"><span class="sub">Restaurant (approved)</span><span class="gold">kamrul@palazzio.com</span></div>
+      <div class="li"><span class="sub">Restaurant (pending)</span><span class="gold">tanvir@bking.com</span></div>
+      <div class="li"><span class="sub">Admin</span><span class="gold">admin@nocap.com.bd</span></div>
+    </div>
+    <div class="card card-blue"><div class="small">
+      Tap a demo row to fill the form, then Sign In.
+    </div></div>
+    </div>
+  </div>
+</main>
+
+
+
+  <script src="js/api.js"></script>
+  <script src="js/mock-data.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    document.getElementById("mockTag").textContent = USE_MOCK ? "demo data" : "live api";
+    let role = "CUSTOMER";
+    $$(".chip").forEach(c => c.onclick = () => {
+      $$(".chip").forEach(x => x.classList.remove("on"));
+      c.classList.add("on"); role = c.dataset.role;
+    });
+    $$(".li").forEach(row => row.onclick = () => {
+      document.querySelector("#email").value = row.querySelector(".gold").textContent;
+      document.querySelector("#password").value = "nocap123";
+    });
+    document.querySelector("#loginBtn").onclick = async () => {
+      try {
+        const u = await login(document.querySelector("#email").value.trim(),
+                              document.querySelector("#password").value, role);
+        location.href = HOME_FOR[u.role];
+      } catch (e) { document.querySelector("#err").textContent = e.message; }
+    };
+  </script>
+</body>
+</html>

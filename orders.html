@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!-- ==========================================================
+     NoCap  |  Screen 07 — My orders + write review
+     Backend for this screen: Part 6
+     ========================================================== -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NoCap — My Orders</title>
+  <link rel="icon" href="assets/logo-mark.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="index.html">
+    <img src="assets/logo-mark.svg" alt="">
+    <b>No<i>Cap</i></b>
+  </a>
+  <nav class="topnav">
+    <a class="" href="home.html"><span>&#127968;</span>Home</a>
+    <a class="" href="checkout.html"><span>&#128722;</span>Cart</a>
+    <a class="on" href="orders.html"><span>&#128203;</span>Orders</a>
+    <a class="" href="profile.html"><span>&#128100;</span>Profile</a>
+  </nav>
+  <div class="topbar-right">
+    <span class="mocktag" id="mockTag"></span>
+    <span class="role">CUSTOMER</span>
+  </div>
+</header>
+
+<main class="page">
+  <div class="wrap">
+    <div class="page-head">
+      <h1 id="pageTitle">My Orders</h1>
+      <p id="pageSub">Reviews unlock after delivery</p>
+    </div>
+
+    <div class="card card-blue" id="reviewIntro"><div class="small">
+      <span class="blue">&#129302; Review rule:</span> you can only review a restaurant you
+      actually ordered from, and only after that order is delivered.
+    </div></div>
+
+    <div id="orderList"></div>
+
+    <div class="hide" id="reviewBox">
+      <input type="hidden" id="reviewOrderId">
+      <div class="title">YOUR RATING</div>
+      <div class="card" style="text-align:center">
+        <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span>
+        <span class="star">&#9733;</span><span class="star">&#9733;</span>
+      </div>
+      <div class="title">YOUR REVIEW</div>
+      <textarea class="input" id="reviewText"
+        placeholder="What was the food like? Was it hot on arrival? Be specific."></textarea>
+      <div class="small">Short generic comments get flagged by the detection system.</div>
+      <div class="err" id="reviewErr"></div>
+      <div class="btnrow">
+        <button class="btn-out btn-sm" style="padding:12px" id="cancelReview">Cancel</button>
+        <button class="btn btn-sm" style="padding:12px" id="submitReview">Submit Review</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<nav class="tabbar">
+    <a class="" href="home.html"><span>&#127968;</span>Home</a>
+    <a class="" href="checkout.html"><span>&#128722;</span>Cart</a>
+    <a class="on" href="orders.html"><span>&#128203;</span>Orders</a>
+    <a class="" href="profile.html"><span>&#128100;</span>Profile</a>
+  </nav>
+
+  <script src="js/api.js"></script>
+  <script src="js/mock-data.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/customer.js"></script>
+  <script>
+    document.getElementById("mockTag").textContent = USE_MOCK ? "demo data" : "live api";
+    if (requireRole("CUSTOMER")) { loadOrders(); initReviewForm(); }
+  </script>
+</body>
+</html>

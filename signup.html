@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!-- ==========================================================
+     NoCap  |  Screen 02 — Customer sign up
+     Backend for this screen: Part 2
+     ========================================================== -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NoCap — Create Account</title>
+  <link rel="icon" href="assets/logo-mark.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="index.html">
+    <img src="assets/logo-mark.svg" alt="">
+    <b>No<i>Cap</i></b>
+  </a>
+  
+  <div class="topbar-right">
+    <span class="mocktag" id="mockTag"></span>
+    <span class="role">CUSTOMER</span>
+  </div>
+</header>
+
+<main class="page">
+  <div class="auth-wrap single">
+    <div class="page-head">
+      <div class="back" onclick="location.href='index.html'">&#8249; Back</div>
+      <h1 id="pageTitle">Create Account</h1>
+      <p id="pageSub">Join NoCap as a customer</p>
+    </div>
+
+    <div class="title">YOUR DETAILS</div>
+    <div class="fieldgrid">
+      <input class="input" id="name" placeholder="Full name">
+      <input class="input" id="email" type="email" placeholder="Email address">
+      <input class="input" id="phone" placeholder="+880 1XXX XXXXXX">
+      <input class="input" id="address" placeholder="Delivery address">
+    </div>
+
+    <div class="title">SECURITY</div>
+    <div class="fieldgrid">
+      <input class="input" id="password" type="password" placeholder="Password">
+      <input class="input" id="confirm" type="password" placeholder="Confirm password">
+    </div>
+
+    <div class="card card-blue"><div class="small">
+      <span class="blue">&#128241; Phone verification:</span> a verified number is what lets
+      you post reviews on your own orders later.
+    </div></div>
+
+    <div class="err" id="err"></div>
+    <button class="btn" id="signupBtn">Create Account</button>
+    <p class="small" style="text-align:center;margin-top:10px">
+      Already registered? <a class="gold" style="font-weight:700" href="index.html">Sign in</a></p>
+  </div>
+</main>
+
+
+
+  <script src="js/api.js"></script>
+  <script src="js/mock-data.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    document.getElementById("mockTag").textContent = USE_MOCK ? "demo data" : "live api";
+    document.querySelector("#signupBtn").onclick = async () => {
+      const err = document.querySelector("#err");
+      const v = id => document.querySelector("#" + id).value.trim();
+      if (!v("name") || !v("email") || !v("password")) { err.textContent = "Name, email and password are required."; return; }
+      if (v("password") !== v("confirm")) { err.textContent = "Passwords do not match."; return; }
+      try {
+        await signup({ name: v("name"), email: v("email"), phone: v("phone"),
+                       address: v("address"), password: v("password") });
+        location.href = "home.html";
+      } catch (e) { err.textContent = e.message; }
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!-- ==========================================================
+     NoCap  |  Screen 04 — Restaurant details + menu
+     Backend for this screen: Part 4
+     ========================================================== -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NoCap — Restaurant</title>
+  <link rel="icon" href="assets/logo-mark.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="index.html">
+    <img src="assets/logo-mark.svg" alt="">
+    <b>No<i>Cap</i></b>
+  </a>
+  <nav class="topnav">
+    <a class="on" href="home.html"><span>&#127968;</span>Home</a>
+    <a class="" href="checkout.html"><span>&#128722;</span>Cart</a>
+    <a class="" href="orders.html"><span>&#128203;</span>Orders</a>
+    <a class="" href="profile.html"><span>&#128100;</span>Profile</a>
+  </nav>
+  <div class="topbar-right">
+    <span class="mocktag" id="mockTag"></span>
+    <span class="role">CUSTOMER</span>
+  </div>
+</header>
+
+<main class="page">
+  <div class="wrap">
+    <div class="page-head">
+      <div class="back" onclick="location.href='home.html'">&#8249; Back</div>
+      <h1 id="pageTitle">Restaurant</h1>
+      <p id="pageSub">Loading...</p>
+    </div>
+
+    <div class="card card-green">
+      <div class="row">
+        <div><div class="stat-l">HYGIENE SCORE</div>
+          <div class="big green"><span id="score">0</span><span style="font-size:14px;color:#7d7d7d">/100</span></div></div>
+        <div style="text-align:right"><span class="badge b-green">&#9989; VERIFIED</span>
+          <div class="sub" style="margin-top:6px" id="ratingLine"></div></div>
+      </div>
+      <div class="bar"><div class="fill" id="scoreBar" style="width:0%"></div></div>
+      <div class="small">Documents verified and kitchen inspected by NoCap admin</div>
+    </div>
+
+    <div class="tabs" id="catTabs"></div>
+    <div id="menuList"></div>
+
+    <div class="card hide" id="cartBar" style="background:linear-gradient(120deg,rgba(212,165,116,.14),rgba(74,144,226,.1))"
+         onclick="location.href='checkout.html'">
+      <div class="row">
+        <div><div class="sub" id="cartCount"></div><div class="name gold" id="cartTotal"></div></div>
+        <span class="badge b-gold" style="padding:8px 16px">VIEW CART &#8250;</span>
+      </div>
+    </div>
+  </div>
+</main>
+
+<nav class="tabbar">
+    <a class="on" href="home.html"><span>&#127968;</span>Home</a>
+    <a class="" href="checkout.html"><span>&#128722;</span>Cart</a>
+    <a class="" href="orders.html"><span>&#128203;</span>Orders</a>
+    <a class="" href="profile.html"><span>&#128100;</span>Profile</a>
+  </nav>
+
+  <script src="js/api.js"></script>
+  <script src="js/mock-data.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/customer.js"></script>
+  <script>
+    document.getElementById("mockTag").textContent = USE_MOCK ? "demo data" : "live api";
+    if (requireRole("CUSTOMER")) {
+      document.querySelector("#pageTitle").id = "restName";
+      document.querySelector("#pageSub").id = "restSub";
+      loadRestaurant();
+    }
+  </script>
+</body>
+</html>

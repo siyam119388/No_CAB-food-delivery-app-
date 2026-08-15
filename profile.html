@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!-- ==========================================================
+     NoCap  |  Screen 08 — Profile
+     Backend for this screen: Part 2
+     ========================================================== -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NoCap — My Profile</title>
+  <link rel="icon" href="assets/logo-mark.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="index.html">
+    <img src="assets/logo-mark.svg" alt="">
+    <b>No<i>Cap</i></b>
+  </a>
+  <nav class="topnav">
+    <a class="" href="home.html"><span>&#127968;</span>Home</a>
+    <a class="" href="checkout.html"><span>&#128722;</span>Cart</a>
+    <a class="" href="orders.html"><span>&#128203;</span>Orders</a>
+    <a class="on" href="profile.html"><span>&#128100;</span>Profile</a>
+  </nav>
+  <div class="topbar-right">
+    <span class="mocktag" id="mockTag"></span>
+    <span class="role">CUSTOMER</span>
+  </div>
+</header>
+
+<main class="page">
+  <div class="wrap">
+    <div class="page-head">
+      <h1 id="pageTitle">My Profile</h1>
+      <p id="pageSub">NoCap customer account</p>
+    </div>
+
+    <div class="card" style="text-align:center;background:linear-gradient(120deg,rgba(212,165,116,.14),rgba(74,144,226,.1))">
+      <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#D4A574,#4A90E2);
+                  margin:0 auto;display:flex;align-items:center;justify-content:center;font-size:21px">&#128100;</div>
+      <div class="name js-username" style="font-size:15px;margin-top:8px"></div>
+      <div class="sub js-useremail"></div>
+    </div>
+
+    <div class="grid2">
+      <div class="stat"><div class="stat-v" id="orderCount">0</div><div class="stat-l">TOTAL ORDERS</div></div>
+      <div class="stat"><div class="stat-v" id="reviewCount">0</div><div class="stat-l">REVIEWS WRITTEN</div></div>
+    </div>
+
+    <div class="title">ACCOUNT</div>
+    <div class="card">
+      <div class="li"><span>&#128241; Phone</span><span class="sub js-userphone"></span></div>
+      <div class="li"><span>&#128205; Address</span><span class="sub js-useraddress"></span></div>
+      <div class="li" onclick="location.href='orders.html'"><span>&#128203; My orders</span><span class="sub">&#8250;</span></div>
+    </div>
+
+    <div class="title">SAFETY &amp; TRUST</div>
+    <div class="card card-green">
+      <div class="li"><span>&#9989; Verified restaurants only</span><span class="badge b-green">ON</span></div>
+      <div class="li"><span>&#129302; Hide flagged reviews</span><span class="badge b-green">ON</span></div>
+    </div>
+
+    <button class="btn-red" onclick="logout()">Log Out</button>
+  </div>
+</main>
+
+<nav class="tabbar">
+    <a class="" href="home.html"><span>&#127968;</span>Home</a>
+    <a class="" href="checkout.html"><span>&#128722;</span>Cart</a>
+    <a class="" href="orders.html"><span>&#128203;</span>Orders</a>
+    <a class="on" href="profile.html"><span>&#128100;</span>Profile</a>
+  </nav>
+
+  <script src="js/api.js"></script>
+  <script src="js/mock-data.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/customer.js"></script>
+  <script>
+    document.getElementById("mockTag").textContent = USE_MOCK ? "demo data" : "live api";
+    if (requireRole("CUSTOMER")) loadProfile();
+  </script>
+</body>
+</html>

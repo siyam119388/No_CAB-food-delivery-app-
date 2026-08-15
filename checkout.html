@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!-- ==========================================================
+     NoCap  |  Screen 05 — Cart + checkout
+     Backend for this screen: Part 4
+     ========================================================== -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NoCap — Cart &amp; Checkout</title>
+  <link rel="icon" href="assets/logo-mark.svg">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="index.html">
+    <img src="assets/logo-mark.svg" alt="">
+    <b>No<i>Cap</i></b>
+  </a>
+  <nav class="topnav">
+    <a class="" href="home.html"><span>&#127968;</span>Home</a>
+    <a class="on" href="checkout.html"><span>&#128722;</span>Cart</a>
+    <a class="" href="orders.html"><span>&#128203;</span>Orders</a>
+    <a class="" href="profile.html"><span>&#128100;</span>Profile</a>
+  </nav>
+  <div class="topbar-right">
+    <span class="mocktag" id="mockTag"></span>
+    <span class="role">CUSTOMER</span>
+  </div>
+</header>
+
+<main class="page">
+  <div class="wrap">
+    <div class="page-head">
+      <div class="back" onclick="location.href='home.html'">&#8249; Back</div>
+      <h1 id="pageTitle">Cart &amp; Checkout</h1>
+      <p id="pageSub">Review your order</p>
+    </div>
+
+    <div id="checkoutBody">
+      <div id="cartItems"></div>
+
+      <div class="title">&#128205; DELIVERY ADDRESS</div>
+      <div class="card card-blue">
+        <div class="row"><div><div class="name">Home</div>
+          <div class="sub" id="addressText"></div></div>
+          <span class="badge b-blue">CHANGE</span></div>
+      </div>
+
+      <div class="title">&#128179; PAYMENT</div>
+      <div class="card card-green js-pay" data-method="COD">
+        <div class="row"><span class="name">&#128176; Cash on Delivery</span>
+          <span class="js-tick">&#10003;</span></div>
+      </div>
+      <div class="card js-pay" data-method="BKASH">
+        <div class="row"><span class="name">&#128241; bKash</span>
+          <span class="js-tick sub">Select</span></div>
+      </div>
+
+      <div class="title">BILL SUMMARY</div>
+      <div class="card">
+        <div class="li"><span class="sub">Item total</span><span id="subTotal"></span></div>
+        <div class="li"><span class="sub">Delivery fee</span><span id="delFee"></span></div>
+        <div class="li"><span class="name">Total</span>
+          <span class="gold" style="font-size:17px;font-weight:700" id="grandTotal"></span></div>
+      </div>
+
+      <button class="btn" id="payBtn">Place Order</button>
+    </div>
+  </div>
+</main>
+
+<nav class="tabbar">
+    <a class="" href="home.html"><span>&#127968;</span>Home</a>
+    <a class="on" href="checkout.html"><span>&#128722;</span>Cart</a>
+    <a class="" href="orders.html"><span>&#128203;</span>Orders</a>
+    <a class="" href="profile.html"><span>&#128100;</span>Profile</a>
+  </nav>
+
+  <script src="js/api.js"></script>
+  <script src="js/mock-data.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/customer.js"></script>
+  <script>
+    document.getElementById("mockTag").textContent = USE_MOCK ? "demo data" : "live api";
+    if (requireRole("CUSTOMER")) {
+      document.querySelector("#pageSub").id = "checkoutSub";
+      loadCheckout();
+    }
+  </script>
+</body>
+</html>
