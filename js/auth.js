@@ -11,7 +11,7 @@ const HOME_FOR = {
 
 /** Currently signed-in user, or null. */
 function currentUser() {
-  return store.get("user", null);
+  return store.get("user", null);//
 }
 
 /** Put at the top of every protected page. */
