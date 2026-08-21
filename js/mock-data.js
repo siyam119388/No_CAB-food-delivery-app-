@@ -3,7 +3,7 @@
    Mirrors database/seed.sql so the frontend runs with no backend.
    When your API is ready, set USE_MOCK = false in api.js and
    delete nothing — this file just stops being used.
-   ============================================================ */
+   ============================================================ *///
 
 const MOCK = {
 
