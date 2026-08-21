@@ -10,7 +10,7 @@ function myRestaurantId() {
 }
 
 async function myRestaurant() {
-  const id = myRestaurantId();
+  const id = myRestaurantId(); //
   if (USE_MOCK) return withOverrides(copy(MOCK.restaurants)).find(r => r.id === id);
   return apiGet("/restaurant/profile");
 }
