@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Table(name = "documents")
 public class Document {
 
-    public enum Type   { TRADE_LICENCE, CHEF_CERT, OWNER_NID }
+    public enum Type   { TRADE_LICENCE, CHEF_CERT, OWNER_NID }//
     public enum Status { PENDING, APPROVED, REJECTED }
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
