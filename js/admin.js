@@ -7,7 +7,7 @@
 /* ---------- data access ---------- */
 
 async function allRestaurants() {
-  if (USE_MOCK) return withOverrides(copy(MOCK.restaurants));
+  if (USE_MOCK) return withOverrides(copy(MOCK.restaurants));/
   return apiGet("/admin/restaurants");
 }
 
