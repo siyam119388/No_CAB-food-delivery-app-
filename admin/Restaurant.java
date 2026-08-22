@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 @Table(name = "restaurants")
 public class Restaurant {
 
-    /** Customers only ever see APPROVED restaurants. */
+    /** Customers only ever see APPROVED restaurants. *//
     public enum Status { PENDING, APPROVED, REJECTED, SUSPENDED }
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
