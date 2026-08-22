@@ -12,6 +12,6 @@ package com.nocap.controller;
    PUT  /orders/{id}/status          accept, reject, mark ready
    GET  /hygiene                     pending check + history
    POST /hygiene/photo               upload kitchen photo
-*/
+*//
 
 // TODO: @RestController @RequestMapping("/api/restaurant") class
