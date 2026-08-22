@@ -19,5 +19,5 @@ public class MenuItem {
     private String description;
     private BigDecimal price;
     private String category;
-    private Boolean available = true;
+    private Boolean available = true;/
 }
