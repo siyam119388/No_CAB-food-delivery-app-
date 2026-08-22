@@ -23,7 +23,7 @@ public class HygieneCheck {
     private LocalDateTime uploadedAt;
 
     @Column(name = "photo_path")
-    private String photoPath;
+    private String photoPath;//
 
     private Integer score = 0;
     private Boolean passed = false;
