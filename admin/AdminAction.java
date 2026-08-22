@@ -12,7 +12,7 @@ public class AdminAction {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "admin_id")
+    @Column(name = "admin_id")/
     private Long adminId;
 
     private String action;
