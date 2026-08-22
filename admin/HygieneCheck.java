@@ -11,7 +11,7 @@ public class HygieneCheck {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+//
     @Column(name = "restaurant_id")
     private Long restaurantId;
 
