@@ -7,6 +7,6 @@ package com.nocap.controller;
    POST /signup              customer registration
    POST /login               all three roles, returns role for redirect
    POST /restaurant/register restaurant owner registration
-*/
+*//
 
 // TODO: @RestController @RequestMapping("/api/auth") class
