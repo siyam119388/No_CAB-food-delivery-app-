@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 public class Inspection {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id; /
 
     @Column(name = "restaurant_id")
     private Long restaurantId;
