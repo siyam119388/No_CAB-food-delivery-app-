@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Table(name = "users")
 public class User {
 
-    public enum Role { CUSTOMER, RESTAURANT_OWNER, ADMIN }
+    public enum Role { CUSTOMER, RESTAURANT_OWNER, ADMIN }/
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
