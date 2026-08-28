@@ -279,26 +279,6 @@ CREATE TABLE review_flags (
 -- 8. HYGIENE CHECKS
 -- ============================================================
 
-CREATE TABLE hygiene_checks (
-    id BIGINT PRIMARY KEY AUTO_INCREMENT,
-
-    restaurant_id BIGINT NOT NULL,
-
-    requested_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-    uploaded_at TIMESTAMP NULL,
-
-    photo_path VARCHAR(500),
-
-    score INT DEFAULT 0,
-
-    passed BOOLEAN DEFAULT FALSE,
-
-    CONSTRAINT fk_hygiene_restaurant
-        FOREIGN KEY (restaurant_id)
-        REFERENCES restaurants(id)
-);
-
 
 -- ============================================================
 -- 9. INSPECTIONS
